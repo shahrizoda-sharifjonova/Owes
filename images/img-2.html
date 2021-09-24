@@ -1,0 +1,538 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let i;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",i=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")&&this._isValidScriptType(i)?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}_isValidScriptType(e){return!e||""===e||"string"==typeof e&&["text/javascript","text/x-javascript","text/ecmascript","text/jscript","application/javascript","application/x-javascript","application/ecmascript","application/jscript","module"].includes(e.toLowerCase())}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript;n||console.error("WPRocket unable to document.write this: "+t);const i=document.createRange(),r=n.parentElement;let a=e.get(n);void 0===a&&(a=n.nextSibling,e.set(n,a));const o=document.createDocumentFragment();i.setStart(o,0),o.appendChild(i.createContextualFragment(t)),r.insertBefore(o,a)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-8822717667672157",
+    enable_page_level_ads: true
+  });
+</script>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="profile" href="https://gmpg.org/xfn/11" />
+<link rel="alternate" type="application/rss+xml" title="HD Wallpapers RSS Feed" href="https://www.allwhitebackground.com/feed" />
+<link rel="alternate" type="application/atom+xml" title="HD Wallpapers Atom Feed" href="https://www.allwhitebackground.com/feed/atom" />
+<link rel="pingback" href="https://www.allwhitebackground.com/xmlrpc.php" />
+<link rel="icon" href="/wp-content/uploads/favicon.ico" type="image/x-icon" />
+<!--[if lt IE 9]>
+	<script src="https://www.allwhitebackground.com/wp-content/themes/wbackground/js/css3-mediaqueries.js"></script>
+<![endif]-->
+
+<!--[if lt IE 7]>
+	<link rel="stylesheet" href="https://www.allwhitebackground.com/wp-content/themes/wbackground/css/font-awesome-ie7.min.css">
+<![endif]-->
+
+
+		<!-- All in One SEO 4.1.2.2 -->
+		<title>Nature Dark Wallpapers HD Background | AWB</title><link rel="stylesheet" href="https://www.allwhitebackground.com/wp-content/cache/min/1/ab6ade971df3dce54f312257abdae81b.css" media="all" data-minify="1" />
+		<meta name="description" content="Download best high-quality free Nature Dark Wallpapers HD Backgrounds, images, pictures, pics, photos available in different wallpaper resolutions. To view the full image size resolution browse the below gallery and click on any below wallpaper thumbnail. Advertisement"/>
+		<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+		<meta name="google-site-verification" content="sweeNown7JRJdxnOXH3C5ZCKTZgZrQ05ANM1Hra2bp8" />
+		<meta name="keywords" content="dark,nature" />
+		<link rel="canonical" href="https://www.allwhitebackground.com/nature-dark-wallpapers.html" />
+		<script type="application/ld+json" class="aioseo-schema">
+			{"@context":"https:\/\/schema.org","@graph":[{"@type":"WebSite","@id":"https:\/\/www.allwhitebackground.com\/#website","url":"https:\/\/www.allwhitebackground.com\/","name":"HD Wallpapers","description":"All White Background","publisher":{"@id":"https:\/\/www.allwhitebackground.com\/#organization"}},{"@type":"Organization","@id":"https:\/\/www.allwhitebackground.com\/#organization","name":"HD Background","url":"https:\/\/www.allwhitebackground.com\/"},{"@type":"BreadcrumbList","@id":"https:\/\/www.allwhitebackground.com\/nature-dark-wallpapers.html#breadcrumblist","itemListElement":[{"@type":"ListItem","@id":"https:\/\/www.allwhitebackground.com\/#listItem","position":"1","item":{"@type":"WebPage","@id":"https:\/\/www.allwhitebackground.com\/","name":"Home","description":"Browse the best collection of HD Backgrounds images, photos, pictures for free all in one place.","url":"https:\/\/www.allwhitebackground.com\/"}}]},{"@type":"Person","@id":"https:\/\/www.allwhitebackground.com\/author\/varinder#author","url":"https:\/\/www.allwhitebackground.com\/author\/varinder","name":"Varinder","image":{"@type":"ImageObject","@id":"https:\/\/www.allwhitebackground.com\/nature-dark-wallpapers.html#authorImage","url":"https:\/\/secure.gravatar.com\/avatar\/480993f9ee41a7a630d0a39381f431af?s=96&d=mm&r=g","width":"96","height":"96","caption":"Varinder"}},{"@type":"WebPage","@id":"https:\/\/www.allwhitebackground.com\/nature-dark-wallpapers.html#webpage","url":"https:\/\/www.allwhitebackground.com\/nature-dark-wallpapers.html","name":"Nature Dark Wallpapers HD Background | AWB","description":"Download best high-quality free Nature Dark Wallpapers HD Backgrounds, images, pictures, pics, photos available in different wallpaper resolutions. To view the full image size resolution browse the below gallery and click on any below wallpaper thumbnail. Advertisement","inLanguage":"en-US","isPartOf":{"@id":"https:\/\/www.allwhitebackground.com\/#website"},"breadcrumb":{"@id":"https:\/\/www.allwhitebackground.com\/nature-dark-wallpapers.html#breadcrumblist"},"author":"https:\/\/www.allwhitebackground.com\/nature-dark-wallpapers.html#author","creator":"https:\/\/www.allwhitebackground.com\/nature-dark-wallpapers.html#author","image":{"@type":"ImageObject","@id":"https:\/\/www.allwhitebackground.com\/#mainImage","url":"https:\/\/www.allwhitebackground.com\/wp-content\/uploads\/7\/Nature-Dark-Wallpaper-3840x2550-01815.jpg","width":"3840","height":"2550"},"primaryImageOfPage":{"@id":"https:\/\/www.allwhitebackground.com\/nature-dark-wallpapers.html#mainImage"},"datePublished":"2020-09-13T12:58:45+00:00","dateModified":"2020-09-13T12:58:45+00:00"},{"@type":"Article","@id":"https:\/\/www.allwhitebackground.com\/nature-dark-wallpapers.html#article","name":"Nature Dark Wallpapers HD Background | AWB","description":"Download best high-quality free Nature Dark Wallpapers HD Backgrounds, images, pictures, pics, photos available in different wallpaper resolutions. To view the full image size resolution browse the below gallery and click on any below wallpaper thumbnail. Advertisement","headline":"Nature Dark Wallpapers HD Background","author":{"@id":"https:\/\/www.allwhitebackground.com\/author\/varinder#author"},"publisher":{"@id":"https:\/\/www.allwhitebackground.com\/#organization"},"datePublished":"2020-09-13T12:58:45+00:00","dateModified":"2020-09-13T12:58:45+00:00","articleSection":"Nature, Dark","mainEntityOfPage":{"@id":"https:\/\/www.allwhitebackground.com\/nature-dark-wallpapers.html#webpage"},"isPartOf":{"@id":"https:\/\/www.allwhitebackground.com\/nature-dark-wallpapers.html#webpage"},"image":{"@type":"ImageObject","@id":"https:\/\/www.allwhitebackground.com\/#articleImage","url":"https:\/\/www.allwhitebackground.com\/wp-content\/uploads\/7\/Nature-Dark-Wallpaper-3840x2550-01815.jpg","width":"3840","height":"2550"}}]}
+		</script>
+		<script type="rocketlazyloadscript" data-rocket-type="text/javascript" >
+			window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+			ga('create', "UA-196746120-1", 'auto');
+			ga('send', 'pageview');
+		</script>
+		<script type="rocketlazyloadscript" async src="https://www.google-analytics.com/analytics.js"></script>
+		<!-- All in One SEO -->
+
+
+<link rel="alternate" type="application/rss+xml" title="HD Wallpapers &raquo; Feed" href="https://www.allwhitebackground.com/feed" />
+<link rel="alternate" type="application/rss+xml" title="HD Wallpapers &raquo; Comments Feed" href="https://www.allwhitebackground.com/comments/feed" />
+<link rel="alternate" type="application/rss+xml" title="HD Wallpapers &raquo; Nature Dark Wallpapers HD Background Comments Feed" href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/feed" />
+<meta content="boxes v.9.0" name="generator"/><meta content="Theme Junkie Framework v.1.0.4" name="generator"/><style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	
+
+
+
+
+
+
+
+
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.allwhitebackground.com/wp-content/themes/wbackground/js/jquery.min.js' id='jquery-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.allwhitebackground.com/wp-content/themes/wbackground/js/jquery-ui-1.8.5.custom.min.js' id='jquery-ui-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.allwhitebackground.com/wp-content/themes/wbackground/js/jquery.flexslider-min.js' id='jquery-flexslider-js'></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' src='https://www.allwhitebackground.com/wp-content/cache/min/1/wp-content/themes/wbackground/js/superfish.js?ver=1632477860' id='jquery-superfish-js'></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' src='https://www.allwhitebackground.com/wp-content/cache/min/1/wp-content/themes/wbackground/js/html5.js?ver=1632477860' id='html5-js'></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' src='https://www.allwhitebackground.com/wp-content/cache/min/1/wp-content/themes/wbackground/js/custom.js?ver=1632477860' id='jquery-custom-js'></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' src='https://www.allwhitebackground.com/wp-content/cache/min/1/wp-content/themes/wbackground/functions/shortcodes/shortcodes.js?ver=1632477860' id='tj_shortcodes-js'></script>
+<link rel="https://api.w.org/" href="https://www.allwhitebackground.com/wp-json/" /><link rel="alternate" type="application/json" href="https://www.allwhitebackground.com/wp-json/wp/v2/posts/30771" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.allwhitebackground.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.allwhitebackground.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='https://www.allwhitebackground.com/?p=30771' />
+<!-- Custom Styling -->
+<style type="text/css">
+body { }              
+</style>
+			<style>
+			#related_posts_thumbnails li{
+				border-right: 1px solid #DDDDDD;
+				background-color: #FFFFFF			}
+			#related_posts_thumbnails li:hover{
+				background-color: #EEEEEF;
+			}
+			.relpost_content{
+				font-size:	16px;
+				color: 		#333333;
+			}
+			.relpost-block-single{
+				background-color: #FFFFFF;
+				border-right: 1px solid  #DDDDDD;
+				border-left: 1px solid  #DDDDDD;
+				margin-right: -1px;
+			}
+			.relpost-block-single:hover{
+				background-color: #EEEEEF;
+			}
+		</style>
+
+	<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="//services.vlitag.com/adv1/?q=a6d7a2548c839c7e098a68bfb4b6beb6" defer="" async=""></script><script type="rocketlazyloadscript"> var vitag = vitag || {};</script>
+	<script type="rocketlazyloadscript">var vitag = vitag || ; vitag.enableGeoLocation= true;</script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ea048eacead252e"></script>
+</head>
+		<script type="rocketlazyloadscript" src="https://itweepinbelltor.com/pfe/current/tag.min.js?z=4541507" data-cfasync="false" async></script>
+<body class="post-template-default single single-post postid-30771 single-format-standard chrome">
+	<script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+<script>
+(function(){
+	if(typeof _bsa !== 'undefined' && _bsa) {
+  		_bsa.init('stickybox', 'CK7IVK37', 'placement:allwhitebackgroundcom');
+  	}
+})();
+</script>
+    	<div id="header">
+		<div class="container">
+							<div id="text-logo">
+					<h1 id="site-title"><a href="https://www.allwhitebackground.com">HD Wallpapers</a></h1>
+					<p id="site-desc">All White Background</p>
+				</div><!-- #text-logo -->
+						<div id="primary-nav" class="container">
+				<ul id="primary-navigation" class="nav"><li id="menu-item-29599" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-29599"><a href="http://www.allwhitebackground.com/">Home</a></li>
+<li id="menu-item-29601" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29601"><a href="https://www.allwhitebackground.com/categories">Categories</a></li>
+<li id="menu-item-29600" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29600"><a href="https://www.allwhitebackground.com/about">About</a></li>
+<li id="menu-item-29602" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29602"><a href="https://www.allwhitebackground.com/contact">Contact</a></li>
+<li id="menu-item-29603" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-29603"><a href="https://www.allwhitebackground.com/copyright-policy">Copyright Policy</a>
+<ul class="sub-menu">
+	<li id="menu-item-29604" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29604"><a href="https://www.allwhitebackground.com/privacy-policy">Privacy Policy</a></li>
+</ul>
+</li>
+</ul>				
+								
+					<div class="btn-nav-right">
+						<i class="icon-reorder"></i> Menu 
+					</div><!-- .btn-nav-right -->
+							
+			</div><!-- #primary-nav -->
+			
+						
+			<div class="clear"></div>
+	
+		</div><!-- .container -->
+	</div><!-- #header -->
+		
+						
+
+			<nav id="mobile-menu">
+				<div class="container">
+					<ul id="responsive-menu" class="ul"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-29599"><a href="http://www.allwhitebackground.com/">Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29601"><a href="https://www.allwhitebackground.com/categories">Categories</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29600"><a href="https://www.allwhitebackground.com/about">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29602"><a href="https://www.allwhitebackground.com/contact">Contact</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-29603"><a href="https://www.allwhitebackground.com/copyright-policy">Copyright Policy</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29604"><a href="https://www.allwhitebackground.com/privacy-policy">Privacy Policy</a></li>
+</ul>
+</li>
+</ul>				</div><!-- .container -->
+			</nav><!-- #mobile-menu -->
+					
+					
+	
+	<div id="main" class="container">	<div id="content">
+	
+					<article id="post-30771" class="post-30771 post type-post status-publish format-standard has-post-thumbnail hentry category-nature tag-dark">
+				
+								<div class="breadcrumbs" typeof="BreadcrumbList" vocab="http://schema.org/"> <!-- Breadcrumb NavXT 6.6.0 -->
+<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to Home Page" href="https://www.allwhitebackground.com" class="home" ><span property="name">Home</span></a><meta property="position" content="1"></span> &gt; <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="Go to the Nature category" href="https://www.allwhitebackground.com/category/nature" class="taxonomy category" ><span property="name">Nature</span></a><meta property="position" content="2"></span> &gt; <span class="post post-post current-item">Nature Dark Wallpapers HD Background</span> </div>
+				<div class="entry-header">
+					Published on Sep 13, 2020				</div><!-- .entry-header -->
+				<h1 class="entry-title">Nature Dark Wallpapers HD Background</h1>
+					 <font size="3"><strong>License Info</strong>: <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license" target="_blank">Creative Commons 4.0 BY-NC</a></font>
+				<div class="clear"></div>	
+				
+				
+									
+				
+				<div class="clear"></div>
+
+													
+									
+									
+					<div class="entry-content">
+						
+<!-- Quick Adsense WordPress Plugin: http://quickadsense.com/ -->
+<div class="1a3fc80506224f5283f5298962e63b61" data-index="1" style="float: none; margin:5px 0 5px 0; text-align:center;">
+<div id = "v-allwhitebackground"></div><script>(function(v,d,o,ai){ai=d.createElement('script');ai.defer=true;ai.async=true;ai.src=v.location.protocol+o;d.head.appendChild(ai);})(window, document, '//a.vdo.ai/core/v-allwhitebackground/vdo.ai.js');</script>
+</div>
+<p>Download best high-quality free <strong>Nature Dark Wallpapers HD Backgrounds</strong>, images, pictures, pics, photos available in different wallpaper resolutions. To view the full image size resolution browse the below gallery and click on any below wallpaper thumbnail.</p>
+
+		<style type="text/css">
+			#gallery-1 {
+				margin: auto;
+			}
+			#gallery-1 .gallery-item {
+				float: left;
+				margin-top: 10px;
+				text-align: center;
+				width: 33%;
+			}
+			#gallery-1 img {
+				border: 2px solid #cfcfcf;
+			}
+			#gallery-1 .gallery-caption {
+				margin-left: 0;
+			}
+			/* see gallery_shortcode() in wp-includes/media.php */
+		</style>
+		<div id='gallery-1' class='gallery galleryid-30771 gallery-columns-3 gallery-size-full'><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a title="Nature Dark Wallpaper 3840&#215;2550 #01815"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31580'><div class="img_wrapper"><img width="3840" height="2550" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%203840%202550'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 3840x2550 #01815" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-3840x2550-01815.jpg" /><noscript><img width="3840" height="2550" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-3840x2550-01815.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 3840x2550 #01815" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 3840&#215;2550 #01815</strong><br>Resolution: 3840 × 2550<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31580" target="blank" class="download">Download</a></dd></dl><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a title="Nature Dark Wallpaper 1000&#215;665 #01823"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31581'><div class="img_wrapper"><img width="1000" height="665" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201000%20665'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 1000x665 #01823" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1000x665-01823.jpg" /><noscript><img width="1000" height="665" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1000x665-01823.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 1000x665 #01823" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 1000&#215;665 #01823</strong><br>Resolution: 1000 × 665<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31581" target="blank" class="download">Download</a></dd></dl><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a title="Nature Dark Wallpaper 1000&#215;667 #01824"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31583'><div class="img_wrapper"><img width="1000" height="667" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201000%20667'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 1000x667 #01824" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1000x667-01824.jpg" /><noscript><img width="1000" height="667" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1000x667-01824.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 1000x667 #01824" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 1000&#215;667 #01824</strong><br>Resolution: 1000 × 667<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31583" target="blank" class="download">Download</a></dd></dl><br style="clear: both" /><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a title="Nature Dark Wallpaper 1000&#215;667 #01826"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31584'><div class="img_wrapper"><img width="1000" height="667" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201000%20667'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 1000x667 #01826" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1000x667-01826.jpg" /><noscript><img width="1000" height="667" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1000x667-01826.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 1000x667 #01826" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 1000&#215;667 #01826</strong><br>Resolution: 1000 × 667<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31584" target="blank" class="download">Download</a></dd></dl><dl class='gallery-item'>
+			<dt class='gallery-icon portrait'>
+				<a title="Nature Dark Wallpaper 1000&#215;1500 #01825"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31586'><div class="img_wrapper"><img width="1000" height="1500" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201000%201500'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 1000x1500 #01825" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1000x1500-01825.jpg" /><noscript><img width="1000" height="1500" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1000x1500-01825.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 1000x1500 #01825" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 1000&#215;1500 #01825</strong><br>Resolution: 1000 × 1500<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31586" target="blank" class="download">Download</a></dd></dl><dl class='gallery-item'>
+			<dt class='gallery-icon portrait'>
+				<a title="Nature Dark Wallpaper 1080&#215;2340 #01819"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31588'><div class="img_wrapper"><img width="1080" height="2340" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201080%202340'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 1080x2340 #01819" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1080x2340-01819.jpg" /><noscript><img width="1080" height="2340" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1080x2340-01819.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 1080x2340 #01819" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 1080&#215;2340 #01819</strong><br>Resolution: 1080 × 2340<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31588" target="blank" class="download">Download</a></dd></dl><br style="clear: both" /><dl class='gallery-item'>
+			<dt class='gallery-icon portrait'>
+				<a title="Nature Dark Wallpaper 1242&#215;2208 #01821"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31590'><div class="img_wrapper"><img width="1242" height="2208" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201242%202208'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 1242x2208 #01821" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1242x2208-01821.jpg" /><noscript><img width="1242" height="2208" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1242x2208-01821.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 1242x2208 #01821" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 1242&#215;2208 #01821</strong><br>Resolution: 1242 × 2208<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31590" target="blank" class="download">Download</a></dd></dl><dl class='gallery-item'>
+			<dt class='gallery-icon portrait'>
+				<a title="Nature Dark Wallpaper 1242&#215;2208 #01822"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31591'><div class="img_wrapper"><img width="1242" height="2208" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201242%202208'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 1242x2208 #01822" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1242x2208-01822.jpg" /><noscript><img width="1242" height="2208" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1242x2208-01822.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 1242x2208 #01822" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 1242&#215;2208 #01822</strong><br>Resolution: 1242 × 2208<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31591" target="blank" class="download">Download</a></dd></dl><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a title="Nature Dark Wallpaper 1270&#215;729 #01828"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31592'><div class="img_wrapper"><img width="1270" height="729" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201270%20729'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 1270x729 #01828" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1270x729-01828.jpg" /><noscript><img width="1270" height="729" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1270x729-01828.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 1270x729 #01828" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 1270&#215;729 #01828</strong><br>Resolution: 1270 × 729<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31592" target="blank" class="download">Download</a></dd></dl><br style="clear: both" /><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a title="Nature Dark Wallpaper 1408&#215;880 #01830"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31594'><div class="img_wrapper"><img width="1408" height="880" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201408%20880'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 1408x880 #01830" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1408x880-01830.jpg" /><noscript><img width="1408" height="880" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1408x880-01830.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 1408x880 #01830" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 1408&#215;880 #01830</strong><br>Resolution: 1408 × 880<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31594" target="blank" class="download">Download</a></dd></dl><dl class='gallery-item'>
+			<dt class='gallery-icon portrait'>
+				<a title="Nature Dark Wallpaper 1600&#215;2400 #01818"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31595'><div class="img_wrapper"><img width="1600" height="2400" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201600%202400'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 1600x2400 #01818" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1600x2400-01818.jpg" /><noscript><img width="1600" height="2400" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1600x2400-01818.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 1600x2400 #01818" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 1600&#215;2400 #01818</strong><br>Resolution: 1600 × 2400<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31595" target="blank" class="download">Download</a></dd></dl><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a title="Nature Dark Wallpaper 1680&#215;1050 #01817"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31597'><div class="img_wrapper"><img width="1680" height="1050" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201680%201050'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 1680x1050 #01817" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1680x1050-01817.jpg" /><noscript><img width="1680" height="1050" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1680x1050-01817.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 1680x1050 #01817" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 1680&#215;1050 #01817</strong><br>Resolution: 1680 × 1050<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31597" target="blank" class="download">Download</a></dd></dl><br style="clear: both" /><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a title="Nature Dark Wallpaper 1920&#215;1080 #01813"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31598'><div class="img_wrapper"><img width="1920" height="1080" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201920%201080'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 1920x1080 #01813" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1920x1080-01813.jpg" /><noscript><img width="1920" height="1080" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1920x1080-01813.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 1920x1080 #01813" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 1920&#215;1080 #01813</strong><br>Resolution: 1920 × 1080<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31598" target="blank" class="download">Download</a></dd></dl><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a title="Nature Dark Wallpaper 1920&#215;1080 #01827"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31601'><div class="img_wrapper"><img width="1920" height="1080" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201920%201080'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 1920x1080 #01827" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1920x1080-01827.png" /><noscript><img width="1920" height="1080" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1920x1080-01827.png" class="attachment-full size-full" alt="Nature Dark Wallpaper 1920x1080 #01827" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 1920&#215;1080 #01827</strong><br>Resolution: 1920 × 1080<br>Image Format: .png<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31601" target="blank" class="download">Download</a></dd></dl><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a title="Nature Dark Wallpaper 1920&#215;1080 #01829"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31604'><div class="img_wrapper"><img width="1920" height="1080" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%201920%201080'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 1920x1080 #01829" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1920x1080-01829.jpg" /><noscript><img width="1920" height="1080" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-1920x1080-01829.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 1920x1080 #01829" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 1920&#215;1080 #01829</strong><br>Resolution: 1920 × 1080<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31604" target="blank" class="download">Download</a></dd></dl><br style="clear: both" /><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a title="Nature Dark Wallpaper 2560&#215;1569 #01820"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31607'><div class="img_wrapper"><img width="2560" height="1569" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%202560%201569'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 2560x1569 #01820" aria-describedby="gallery-1-31607" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-2560x1569-01820.jpg" /><noscript><img width="2560" height="1569" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-2560x1569-01820.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 2560x1569 #01820" aria-describedby="gallery-1-31607" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 2560&#215;1569 #01820</strong><br>Resolution: 2560 × 1569<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31607" target="blank" class="download">Download</a></dd>
+				<dd class='wp-caption-text gallery-caption' id='gallery-1-31607'>
+				Nature-Dark-Tree-Wallpaper-HD-Desktop-6767-Ongur.jpg
+				</dd></dl><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a title="Nature Dark Wallpaper 2560&#215;1600 #01814"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31609'><div class="img_wrapper"><img width="2560" height="1600" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%202560%201600'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 2560x1600 #01814" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-2560x1600-01814.jpg" /><noscript><img width="2560" height="1600" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-2560x1600-01814.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 2560x1600 #01814" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 2560&#215;1600 #01814</strong><br>Resolution: 2560 × 1600<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31609" target="blank" class="download">Download</a></dd></dl><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a title="Nature Dark Wallpaper 3000&#215;1875 #01831"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31611'><div class="img_wrapper"><img width="3000" height="1875" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%203000%201875'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 3000x1875 #01831" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-3000x1875-01831.jpg" /><noscript><img width="3000" height="1875" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-3000x1875-01831.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 3000x1875 #01831" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 3000&#215;1875 #01831</strong><br>Resolution: 3000 × 1875<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31611" target="blank" class="download">Download</a></dd></dl><br style="clear: both" /><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a title="Nature Dark Wallpaper 3840&#215;2160 #01816"  href='https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31613'><div class="img_wrapper"><img width="3840" height="2160" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%203840%202160'%3E%3C/svg%3E" class="attachment-full size-full" alt="Nature Dark Wallpaper 3840x2160 #01816" data-lazy-src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-3840x2160-01816.jpg" /><noscript><img width="3840" height="2160" src="https://www.allwhitebackground.com/wp-content/uploads/7/Nature-Dark-Wallpaper-3840x2160-01816.jpg" class="attachment-full size-full" alt="Nature Dark Wallpaper 3840x2160 #01816" /></noscript></div></a>
+			</dt><strong><dd class="awb-caption-caption">Nature Dark Wallpaper 3840&#215;2160 #01816</strong><br>Resolution: 3840 × 2160<br>Image Format: .jpg<br><a href="https://www.allwhitebackground.com/nature-dark-wallpapers.html/download/31613" target="blank" class="download">Download</a></dd></dl>
+			<br style='clear: both' />
+		</div>
+
+
+<!-- Quick Adsense WordPress Plugin: http://quickadsense.com/ -->
+<div class="1a3fc80506224f5283f5298962e63b61" data-index="2" style="float: none; margin:10px 0 10px 0; text-align:center;">
+<center><span style="font-size:0.8em">Advertisement</span><style type="text/css"> 
+.adslot_1 { max-width: 300px; height: auto; margin:10px 0px; }
+@media (min-width:125px) { .adslot_1 { width:125px; height:125px; } } 
+@media (min-width:180px) { .adslot_1 { width:180px; height:150px; } } 
+@media (min-width:200px) { .adslot_1 { width:200px; height:200px; } } 
+@media (min-width:250px) { .adslot_1 { width:250px; height:250px; } } 
+@media (min-width:300px) { .adslot_1 { width:300px; height:600px; } } 
+@media (min-width:336px) { .adslot_1 { width:336px; height:280px; } } 
+@media (min-width:468px) { .adslot_1 { width:468px; height:60px; } } 
+@media (min-width:728px) { .adslot_1 { width:728px; height:90px; } }
+</style><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Link ads responsive -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8822717667672157"
+     data-ad-slot="9511443968"
+     data-ad-format="link"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></center>
+</div>
+
+<div style="font-size: 0px; height: 0px; line-height: 0px; margin: 0; padding: 0; clear: both;"></div>											</div><!-- .entry-content -->
+						
+									 
+				<div class="clear"></div>
+			
+			</article><!-- #post -->
+			<br/ >					
+<h3>Matched Content:</h3>
+<center><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-8822717667672157"
+     data-ad-slot="2205723074"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></center>
+<br/ >	
+					<h3>Related Images:</h3>
+<!-- relpost-thumb-wrapper --><div class="relpost-thumb-wrapper"><!-- filter-class --><div class="relpost-thumb-container"><div style="clear: both"></div><div style="clear: both"></div><!-- relpost-block-container --><div class="relpost-block-container"><a class="relpost-block-single" href="https://www.allwhitebackground.com/creek-wallpapers.html"><div class="relpost-custom-block-single" style="width: 190px; height: 250px;"><div class="relpost-block-single-image" alt="Creek Wallpaper 1024x768 #60987"  style="background: transparent url(https://www.allwhitebackground.com/wp-content/uploads/9/Creek-Wallpaper-1024x768-60987-190x190.jpg) no-repeat scroll 0% 0%; width: 190px; height: 190px;"></div><div class="relpost-block-single-text"  style="font-family: Arial;  font-size: 16px;  color: #333333;">Creek Wallpapers HD Background</div></div></a><a class="relpost-block-single" href="https://www.allwhitebackground.com/snowdrop-wallpapers.html"><div class="relpost-custom-block-single" style="width: 190px; height: 250px;"><div class="relpost-block-single-image" alt="Snowdrop Wallpaper 1000x1500 #65978"  style="background: transparent url(https://www.allwhitebackground.com/wp-content/uploads/9/Snowdrop-Wallpaper-1000x1500-65978-190x190.jpg) no-repeat scroll 0% 0%; width: 190px; height: 190px;"></div><div class="relpost-block-single-text"  style="font-family: Arial;  font-size: 16px;  color: #333333;">Snowdrop Wallpapers HD Background</div></div></a><a class="relpost-block-single" href="https://www.allwhitebackground.com/sunset-maldives-wallpapers.html"><div class="relpost-custom-block-single" style="width: 190px; height: 250px;"><div class="relpost-block-single-image" alt="Sunset Maldives Wallpaper 1600x1000 #02975"  style="background: transparent url(https://www.allwhitebackground.com/wp-content/uploads/7/Sunset-Maldives-Wallpaper-1600x1000-02975-190x190.jpg) no-repeat scroll 0% 0%; width: 190px; height: 190px;"></div><div class="relpost-block-single-text"  style="font-family: Arial;  font-size: 16px;  color: #333333;">Sunset Maldives Wallpapers HD Background</div></div></a><a class="relpost-block-single" href="https://www.allwhitebackground.com/phillipe-island-wallpapers.html"><div class="relpost-custom-block-single" style="width: 190px; height: 250px;"><div class="relpost-block-single-image" alt="Phillipe Island Wallpaper 1024x768 #62661"  style="background: transparent url(https://www.allwhitebackground.com/wp-content/uploads/9/Phillipe-Island-Wallpaper-1024x768-62661-190x190.jpg) no-repeat scroll 0% 0%; width: 190px; height: 190px;"></div><div class="relpost-block-single-text"  style="font-family: Arial;  font-size: 16px;  color: #333333;">Phillipe Island Wallpapers HD Background</div></div></a><a class="relpost-block-single" href="https://www.allwhitebackground.com/stormy-skies-background.html"><div class="relpost-custom-block-single" style="width: 190px; height: 250px;"><div class="relpost-block-single-image" alt="Stormy Skies"  style="background: transparent url(https://www.allwhitebackground.com/wp-content/uploads/7/Stormy-Skies-190x190.jpg) no-repeat scroll 0% 0%; width: 190px; height: 190px;"></div><div class="relpost-block-single-text"  style="font-family: Arial;  font-size: 16px;  color: #333333;">Stormy Skies Background Images</div></div></a><a class="relpost-block-single" href="https://www.allwhitebackground.com/lake-louise-wallpapers.html"><div class="relpost-custom-block-single" style="width: 190px; height: 250px;"><div class="relpost-block-single-image" alt="Lake Louise Wallpaper 1024x768 #61202"  style="background: transparent url(https://www.allwhitebackground.com/wp-content/uploads/9/Lake-Louise-Wallpaper-1024x768-61202-190x190.jpg) no-repeat scroll 0% 0%; width: 190px; height: 190px;"></div><div class="relpost-block-single-text"  style="font-family: Arial;  font-size: 16px;  color: #333333;">Lake Louise Wallpapers HD Background</div></div></a></div><!-- close relpost-block-container --><div style="clear: both"></div></div><!-- close filter class --></div><!-- close relpost-thumb-wrapper -->		
+					  		 	
+		  			  		
+			
+	</div><!-- #content -->
+
+
+	<div id="sidebar">
+	
+				
+			<div class="widget entry-meta entry-header">
+			
+				                 
+
+				
+				<span class="entry-categories"><i class="icon-folder-close"></i> <a href="https://www.allwhitebackground.com/category/nature" rel="category tag">Nature</a></span>
+				
+				<span class="entry-tags"><i class="icon-tags"></i> <a href="https://www.allwhitebackground.com/tag/dark" rel="tag">Dark</a></span>				
+								
+				<div class="additional-info">	
+									</div><!-- .additional-info -->
+							
+			</div><!-- .entry-meta .entry-header -->
+				
+				
+		<aside id="search-3" class="widget widget_search"><div class="search-form">
+	<form action="https://www.allwhitebackground.com" id="searchform" method="get">
+		<input name="s" type="text" placeholder="Search this site..."></input>
+	</form>
+</div><!-- .search-form --></aside><aside id="custom_html-2" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div class="adsbyvli" data-ad-slot="vi_1183045264"></div> <script type="rocketlazyloadscript">(vitag.Init = window.vitag.Init || []).push(function () { viAPItag.display("vi_1183045264") })</script>
+</div></aside>
+		<aside id="recent-posts-3" class="widget widget_recent_entries">
+		<h3 class="widget-title">Recent Posts</h3>
+		<ul>
+											<li>
+					<a href="https://www.allwhitebackground.com/batman-dark-victory-comic-wallpapers.html">Batman Dark Victory Comic Wallpapers HD Background</a>
+									</li>
+											<li>
+					<a href="https://www.allwhitebackground.com/batman-the-killing-joke-comic-wallpapers.html">Batman The Killing Joke Comic Wallpapers HD Background</a>
+									</li>
+											<li>
+					<a href="https://www.allwhitebackground.com/battle-chasers-comic-wallpapers.html">Battle Chasers Comic Wallpapers HD Background</a>
+									</li>
+											<li>
+					<a href="https://www.allwhitebackground.com/batwoman-comic-wallpapers.html">Batwoman Comic Wallpapers HD Background</a>
+									</li>
+											<li>
+					<a href="https://www.allwhitebackground.com/fantasy-dark-wallpapers.html">Fantasy Dark Wallpapers HD Background</a>
+									</li>
+					</ul>
+
+		</aside><aside id="categories-3" class="widget widget_categories"><h3 class="widget-title">Categories</h3>
+			<ul>
+					<li class="cat-item cat-item-373"><a href="https://www.allwhitebackground.com/category/abstract">Abstract</a>
+</li>
+	<li class="cat-item cat-item-17"><a href="https://www.allwhitebackground.com/category/fashion/accessories">Accessories</a>
+</li>
+	<li class="cat-item cat-item-302"><a href="https://www.allwhitebackground.com/category/aesthetic">Aesthetic</a>
+</li>
+	<li class="cat-item cat-item-128"><a href="https://www.allwhitebackground.com/category/animals">Animals</a>
+</li>
+	<li class="cat-item cat-item-183"><a href="https://www.allwhitebackground.com/category/anime">Anime</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://www.allwhitebackground.com/category/art">Art</a>
+</li>
+	<li class="cat-item cat-item-122"><a href="https://www.allwhitebackground.com/category/lifestyle/beauty">Beauty</a>
+</li>
+	<li class="cat-item cat-item-138"><a href="https://www.allwhitebackground.com/category/animals/birds">Birds</a>
+</li>
+	<li class="cat-item cat-item-184"><a href="https://www.allwhitebackground.com/category/brands">Brands</a>
+</li>
+	<li class="cat-item cat-item-129"><a href="https://www.allwhitebackground.com/category/business">Business</a>
+</li>
+	<li class="cat-item cat-item-174"><a href="https://www.allwhitebackground.com/category/vehicles/cars">Cars</a>
+</li>
+	<li class="cat-item cat-item-176"><a href="https://www.allwhitebackground.com/category/cartoon">Cartoon</a>
+</li>
+	<li class="cat-item cat-item-311"><a href="https://www.allwhitebackground.com/category/celebrities">Celebrities</a>
+</li>
+	<li class="cat-item cat-item-2"><a href="https://www.allwhitebackground.com/category/fashion/clothing">Clothing</a>
+</li>
+	<li class="cat-item cat-item-380"><a href="https://www.allwhitebackground.com/category/comic">Comic</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="https://www.allwhitebackground.com/category/computers-accessories">Computers &amp; Accessories</a>
+</li>
+	<li class="cat-item cat-item-375"><a href="https://www.allwhitebackground.com/category/dark">Dark</a>
+</li>
+	<li class="cat-item cat-item-156"><a href="https://www.allwhitebackground.com/category/food/drinks">Drinks</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="https://www.allwhitebackground.com/category/education">Education</a>
+</li>
+	<li class="cat-item cat-item-141"><a href="https://www.allwhitebackground.com/category/fantasy">Fantasy</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="https://www.allwhitebackground.com/category/fashion">Fashion</a>
+</li>
+	<li class="cat-item cat-item-126"><a href="https://www.allwhitebackground.com/category/flowers">Flowers</a>
+</li>
+	<li class="cat-item cat-item-118"><a href="https://www.allwhitebackground.com/category/food">Food</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="https://www.allwhitebackground.com/category/fashion/footwear">Footwear</a>
+</li>
+	<li class="cat-item cat-item-119"><a href="https://www.allwhitebackground.com/category/food/fruits">Fruits</a>
+</li>
+	<li class="cat-item cat-item-169"><a href="https://www.allwhitebackground.com/category/gaming">Gaming</a>
+</li>
+	<li class="cat-item cat-item-123"><a href="https://www.allwhitebackground.com/category/lifestyle/health-fitness">Health &amp; Fitness</a>
+</li>
+	<li class="cat-item cat-item-124"><a href="https://www.allwhitebackground.com/category/holidays">Holidays</a>
+</li>
+	<li class="cat-item cat-item-140"><a href="https://www.allwhitebackground.com/category/animals/insects">Insects</a>
+</li>
+	<li class="cat-item cat-item-90"><a href="https://www.allwhitebackground.com/category/internet">Internet</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="https://www.allwhitebackground.com/category/lifestyle">Lifestyle</a>
+</li>
+	<li class="cat-item cat-item-162"><a href="https://www.allwhitebackground.com/category/love">Love</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://www.allwhitebackground.com/category/more">More</a>
+</li>
+	<li class="cat-item cat-item-173"><a href="https://www.allwhitebackground.com/category/movies">Movies</a>
+</li>
+	<li class="cat-item cat-item-125"><a href="https://www.allwhitebackground.com/category/music">Music</a>
+</li>
+	<li class="cat-item cat-item-136"><a href="https://www.allwhitebackground.com/category/nature">Nature</a>
+</li>
+	<li class="cat-item cat-item-166"><a href="https://www.allwhitebackground.com/category/numbers">Numbers</a>
+</li>
+	<li class="cat-item cat-item-157"><a href="https://www.allwhitebackground.com/category/objects">Objects</a>
+</li>
+	<li class="cat-item cat-item-137"><a href="https://www.allwhitebackground.com/category/people">People</a>
+</li>
+	<li class="cat-item cat-item-182"><a href="https://www.allwhitebackground.com/category/photography">Photography</a>
+</li>
+	<li class="cat-item cat-item-164"><a href="https://www.allwhitebackground.com/category/powerpoint">Powerpoint</a>
+</li>
+	<li class="cat-item cat-item-165"><a href="https://www.allwhitebackground.com/category/religion">Religion</a>
+</li>
+	<li class="cat-item cat-item-374"><a href="https://www.allwhitebackground.com/category/resolution">Resolution</a>
+</li>
+	<li class="cat-item cat-item-130"><a href="https://www.allwhitebackground.com/category/space">Space</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="https://www.allwhitebackground.com/category/sports">Sports</a>
+</li>
+	<li class="cat-item cat-item-149"><a href="https://www.allwhitebackground.com/category/superheroes">Superheroes</a>
+</li>
+	<li class="cat-item cat-item-161"><a href="https://www.allwhitebackground.com/category/technology">Technology</a>
+</li>
+	<li class="cat-item cat-item-127"><a href="https://www.allwhitebackground.com/category/travel-world">Travel &amp; World</a>
+</li>
+	<li class="cat-item cat-item-120"><a href="https://www.allwhitebackground.com/category/food/vegetables">Vegetables</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="https://www.allwhitebackground.com/category/vehicles">Vehicles</a>
+</li>
+	<li class="cat-item cat-item-168"><a href="https://www.allwhitebackground.com/category/zodiac">Zodiac</a>
+</li>
+			</ul>
+
+			</aside>		
+	</div><!-- #sidebar -->
+	
+<div class="clear"></div>
+</div><!-- #main -->
+
+	<footer id="footer">
+				
+								
+		<div id="copyright" class="container">
+				<div class="right">
+				&copy; 2016 - 2021 <a href="https://www.allwhitebackground.com">HD Wallpaper Backgrounds</a>. All rights reserved. 				</div><!-- .left -->
+				<div class="left">
+				
+
+<a href="/">Home</a> | <a href="/cookie-policy">Cookie Policy</a> | <a href="/privacy-policy">Privacy Policy</a> | <a title="Terms & Conditions" href="/terms-conditions">TOS</a> | <a title="Privacy Policy" href="/privacy-policy">Privacy</a> | <a href="/copyright-policy">Copyright Policy</a> | <a href="/about">About</a> | <a href="/contact">Contact</a> | <a href="/sitemap.xml">Sitemap</a>
+				</div>
+				
+					
+				</div><!-- .right -->
+				<div class="clear"></div>
+		</div><!-- #copyright -->
+		
+	</footer><!-- #footer -->
+	
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">var jQueryScriptOutputted = false;function initJQuery() {if (typeof(jQuery) == "undefined") {if (!jQueryScriptOutputted) {jQueryScriptOutputted = true;document.write("<scr" + "ipt type=\"text/javascript\" src=\"https://code.jquery.com/jquery-1.8.2.min.js\"></scr" + "ipt>");}setTimeout("initJQuery()", 50);}}initJQuery();</script><script type="rocketlazyloadscript" data-rocket-type="text/javascript">jQuery(document).ready(function() {
+jQuery(".1a3fc80506224f5283f5298962e63b61").click(function() {
+jQuery.post(
+"https://www.allwhitebackground.com/wp-admin/admin-ajax.php", {
+"action": "quick_adsense_onpost_ad_click",
+"quick_adsense_onpost_ad_index": jQuery(this).attr("data-index"),
+"quick_adsense_nonce": "45acccde87",
+}, function(response) { }
+);
+});
+});
+</script><script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-browser-checker-js-after'>
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type='text/javascript' id='rocket-preload-links-js-extra'>
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin|\/logout|\/wp-login.php","usesTrailingSlash":"","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/www.allwhitebackground.com","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-preload-links-js-after'>
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.allwhitebackground.com/wp-includes/js/comment-reply.min.js' id='comment-reply-js'></script>
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://www.allwhitebackground.com/wp-content/plugins/wp-rocket/assets/js/lazyload/16.1/lazyload.min.js"></script></body>
+</html>
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me -->
